@@ -3,7 +3,8 @@ import { HttpClient } from "@angular/common/http";
 import * as _ from 'lodash';
 // import { Observable} from "rx
 import { SearchPipe } from './search.pipe';
-import { Product } from './product';
+import { IProduct } from './product';
+import { ProductService } from './ProductService';
 
 @Component({
   selector: 'app-root',
@@ -12,23 +13,30 @@ import { Product } from './product';
 })
 export class AppComponent implements OnInit {
   title = 'JHTCatalog';
-  public data: any = []
-  constructor(private http: HttpClient) {
-  }
+  // public json: any = []
+  products!: IProduct[];
+  searchText!: '';
+  // product: IProduct = new IProduct();
+  constructor(private productService: ProductService) { }
 
-  getData() {
-    const url = 'https://63e27e3bad0093bf29d15131.mockapi.io/api/product'
-    this.http.get(url).subscribe((response) => {
-      this.data = response
-      console.log(this.data)
-    })
-  }
-  onFilter() {
-    //todo: filter logic
-  }
+  // getJson() {
+  //   const url = 'https://63e27e3bad0093bf29d15131.mockapi.io/api/product'
+  //   this.http.get(url).subscribe((response) => {
+  //     this.json = response
+  //     console.log(this.json)
+  //   })
+  // }
 
   ngOnInit() {
-    this.getData()
+    try {
+      this.productService.getProducts().subscribe(data => {
+        console.log(data);
+        this.products = data;
+      })
+    }
+    catch{
+      console.log("Something happened and we couldn't find your api.")
+    }
   }
 }
 

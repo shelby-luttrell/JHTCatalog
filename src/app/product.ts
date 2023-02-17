@@ -1,7 +1,5 @@
-export interface Product{
+export interface IProduct{
    id: string;
    webDisplayName: string;
    heroImage: string;
-   dateCreated: string;
-   tag: string; 
 }

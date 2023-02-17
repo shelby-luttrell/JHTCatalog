@@ -3,7 +3,7 @@
 <div>
   <mat-toolbar class="toolbar">
     <img width="250" alt="Matrix Logo" src="./../assets/matrix.png" />
-    <div fxFlex fxLayoutAlign="center" fxLayout="row wrap">
+    <div fxFlex fxLayoutAlign="left" fxLayout="row wrap">
       <ul fxLayout fxLayoutGap="15px">
         <a routerLink="/Facility">FOR YOUR FACILITY</a>
         <a routerLink="/Home">FOR YOUR HOME</a>
@@ -15,22 +15,22 @@
 </div>
 
 <div class="searchbar">
-  <div fxLayoutGap="10px" fxLayoutAlign="center">
-    <label for="site-search">Filter</label>
-    <input type="search" id="site-search" name="searchbutton">
-    <button>Search</button>
+  <div class="form-group">
+    <label for="search-text">Filter Products</label>
+    <input type="email" class="form-control" id="search-text" aria-describedby="search-text" [(ngModel)]="searchText"
+      placeholder="Enter text to search" autofocus>
   </div>
 </div>
 
 <div class="content">
   <div fxLayout="row wrap" fxLayoutGap="16px grid">
-    <div fxFlex.sm="100%" fxFlex.gt-md="25%" *ngFor="let image of (data | search)">
+    <div fxFlex.sm="100%" fxFlex.gt-md="25%" *ngFor="let product of (products | search:searchText)">
       <mat-card fxFlex.gt-md="200">
         <mat-card-content>
-          <img mat-card-image [src]="image.heroImage" width="200" height="200">
+          <img mat-card-image [src]="product.heroImage" width="300" height="300">
         </mat-card-content>
         <mat-card-header>
-          <mat-card-title class="card-title">{{image.webDisplayName}}</mat-card-title>
+          <mat-card-title class="card-title">{{product.webDisplayName}} /</mat-card-title>
         </mat-card-header>
       </mat-card>
     </div>
