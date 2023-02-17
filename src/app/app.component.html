@@ -1,30 +1,36 @@
-<!-- <ul *ngIf="products$ | async as products else noData">
-  <li *ngFor="let product of products">
-      {{product.id}}
-  </li> 
-</ul>
-<ng-template #noData>No Data Available</ng-template> -->
-
 <!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <img width="250" alt="Matrix Logo" src="./../assets/matrix.png" />
-</div>
 
 <div>
-  <label for="site-search">Filter</label>
-  <input type="search" id="site-search" name="q">
-  <button>Search</button>
+  <mat-toolbar class="toolbar">
+    <img width="250" alt="Matrix Logo" src="./../assets/matrix.png" />
+    <div fxFlex fxLayoutAlign="center" fxLayout="row wrap">
+      <ul fxLayout fxLayoutGap="15px">
+        <a routerLink="/Facility">FOR YOUR FACILITY</a>
+        <a routerLink="/Home">FOR YOUR HOME</a>
+        <a routerLink="/About">ABOUT US</a>
+        <a routerLink="/Contact">CONTACT US</a>
+      </ul>
+    </div>
+  </mat-toolbar>
+</div>
+
+<div class="searchbar">
+  <div fxLayoutGap="10px" fxLayoutAlign="center">
+    <label for="site-search">Filter</label>
+    <input type="search" id="site-search" name="searchbutton">
+    <button>Search</button>
+  </div>
 </div>
 
 <div class="content">
   <div fxLayout="row wrap" fxLayoutGap="16px grid">
-    <div fxFlex.sm="100%" fxFlex.gt-md="25%" *ngFor="let image of data">
+    <div fxFlex.sm="100%" fxFlex.gt-md="25%" *ngFor="let image of (data | search)">
       <mat-card fxFlex.gt-md="200">
         <mat-card-content>
           <img mat-card-image [src]="image.heroImage" width="200" height="200">
         </mat-card-content>
         <mat-card-header>
-          <mat-card-title style="color: #e1261c;">{{image.webDisplayName}}</mat-card-title>
+          <mat-card-title class="card-title">{{image.webDisplayName}}</mat-card-title>
         </mat-card-header>
       </mat-card>
     </div>
