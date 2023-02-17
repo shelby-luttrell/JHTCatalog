@@ -18,10 +18,12 @@ export class SearchPipe implements PipeTransform {
       return products;
     }
     console.log(searchText);
+    console.log(products);
 
     searchText = searchText.toLocaleLowerCase();
     
-    return products.filter(product => product.webDisplayName.includes(searchText));
+    const filtered = products.filter(product => product.webDisplayName.toLocaleLowerCase().includes(searchText));
+    console.log(filtered);
+    return filtered;
   }
-
 }
